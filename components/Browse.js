@@ -12,6 +12,7 @@ import {
 } from './Styles'
 import {
   View,
+  ScrollView,
   AsyncStorage
 } from 'react-native'
 
@@ -33,9 +34,9 @@ export default class Browse extends Component {
   async fetchCards () {
     const keys = await AsyncStorage.getAllKeys()
     let cards = await AsyncStorage.multiGet(keys)
-    cards = cards.map(q => JSON.parse(q[1]))
+    cards = cards.map(c => JSON.parse(c[1]))
     this.setState({
-      cards
+      cards: cards.sort((a, b) => a.timestamp < b.timestamp) // Descending timestamp
     })
   }
 
@@ -48,7 +49,7 @@ export default class Browse extends Component {
   }
 
   shortenText (text) {
-    const cutOff = 32
+    const cutOff = 34
     return text.length > cutOff ? text.slice(0, cutOff) + '...' : text
   }
 
@@ -58,17 +59,19 @@ export default class Browse extends Component {
 
   renderList () {
     return (
-      <View style={[styles.container, { justifyContent: 'flex-start', alignItems: 'stretch' }]}>
-        <List containerStyle={{ marginTop: 0 }}>
-          {this.state.cards.map((item, index) => (
-            <ListItem
-              key={index}
-              title={this.shortenText(item.question)}
-              onPress={this.onListItemPress.bind(this, index)}
-            />
-          ))}
-        </List>
-      </View>
+      <ScrollView>
+        <View style={[styles.container, { justifyContent: 'flex-start', alignItems: 'stretch' }]}>
+          <List containerStyle={{ marginTop: 0 }}>
+            {this.state.cards.map((item, index) => (
+              <ListItem
+                key={index}
+                title={this.shortenText(item.question)}
+                onPress={this.onListItemPress.bind(this, index)}
+              />
+            ))}
+          </List>
+        </View>
+      </ScrollView>
     )
   }
 

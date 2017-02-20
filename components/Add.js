@@ -39,7 +39,7 @@ export default class Add extends Component {
   }
 
   add () {
-    if (!this.state.question || !this.state.answer) {
+    if (!this.state.question.trim() || !this.state.answer.trim()) {
       this.props.navigator.showLocalAlert('Please fill both fields', {
         text: { color: '#fff' },
         container: { backgroundColor: '#f44336' }
