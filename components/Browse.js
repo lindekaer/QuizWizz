@@ -36,8 +36,9 @@ export default class Browse extends Component {
     let cards = await AsyncStorage.multiGet(keys)
     cards = cards.map(c => JSON.parse(c[1]))
     this.setState({
-      cards: cards.sort((a, b) => a.timestamp < b.timestamp) // Descending timestamp
+      cards: cards.sort((a, b) => b.timestamp - a.timestamp) // Descending timestamp
     })
+    console.log(this.state.cards)
   }
 
   static get route () {
