@@ -70,7 +70,10 @@ export default class Quiz extends Component {
       </View>
     )
     return (
-      <View style={[styles.container, { alignItems: 'flex-start', justifyContent: 'space-between' }]}>
+      <View style={[styles.container, { alignItems: 'flex-start', justifyContent: 'space-between', paddingTop: 20 }]}>
+        <Text style={{ alignSelf: 'stretch', textAlign: 'center', backgroundColor: 'transparent', color: 'white', paddingBottom: 20 }}>
+          {this.state.index} of {this.state.numberOfCards}
+        </Text>
         <View style={{ flex: 1, alignSelf: 'stretch' }}>
           {questionNode}
           {this.state.isShowingAnswer ? answerNode : null}

@@ -38,7 +38,6 @@ export default class Browse extends Component {
     this.setState({
       cards: cards.sort((a, b) => b.timestamp - a.timestamp) // Descending timestamp
     })
-    console.log(this.state.cards)
   }
 
   static get route () {
