@@ -126,15 +126,17 @@ export default class Quiz extends Component {
   renderComplete () {
     return (
       <View style={{ flex: 1, flexDirection: 'column', paddingBottom: 40, paddingTop: 40 }}>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Animatable.View animation='fadeIn' style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <View style={{ justifyContent: 'center', alignItems: 'center', height: 180, width: 180, backgroundColor: 'white', borderRadius: 180 / 2, borderWidth: 10, borderColor: colors.blueDark }}>
-            <Text style={{ left: 90, top: 20, position: 'absolute' }}>⭐️</Text>
-            <Text style={{ left: 70, top: 13, position: 'absolute' }}>⭐️</Text>
-            <Text style={{ left: 50, top: 20, position: 'absolute' }}>⭐️</Text>
-            <Animatable.Text animation='pulse' easing='ease-out' iterationCount='infinite' duration={800} style={{ fontSize: 80, backgroundColor: 'transparent', left: 2, top: 10 }}>🏆</Animatable.Text>
+            <Animatable.View animation='pulse' easing='ease-out' iterationCount='infinite' duration={900} style={{ backgroundColor: 'transparent', top: 10, left: 2 }}>
+              <Text style={{ left: 16, top: -15, position: 'absolute' }}>⭐️</Text>
+              <Text style={{ left: 33, top: -25, position: 'absolute' }}>⭐️</Text>
+              <Text style={{ left: 50, top: -15, position: 'absolute' }}>⭐️</Text>
+              <Text style={{ fontSize: 80, left: 2 }}>🏆</Text>
+            </Animatable.View>
           </View>
           <Text style={[styles.bigText, { marginTop: 20 }]}>{`You completed ${this.state.cards.length} card${this.state.cards.length > 1 ? 's' : ''}!`}</Text>
-        </View>
+        </Animatable.View>
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
           {this.renderButton()}
         </View>
