@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as Animatable from 'react-native-animatable'
 import { shuffle } from 'lodash'
 import LinearGradient from 'react-native-linear-gradient'
 import FullscreenText from './FullscreenText'
@@ -122,13 +123,32 @@ export default class Quiz extends Component {
     }
   }
 
+  renderComplete () {
+    return (
+      <View style={{ flex: 1, flexDirection: 'column', paddingBottom: 40, paddingTop: 40 }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ justifyContent: 'center', alignItems: 'center', height: 180, width: 180, backgroundColor: 'white', borderRadius: 180 / 2, borderWidth: 10, borderColor: colors.blueDark }}>
+            <Text style={{ left: 90, top: 20, position: 'absolute' }}>⭐️</Text>
+            <Text style={{ left: 70, top: 13, position: 'absolute' }}>⭐️</Text>
+            <Text style={{ left: 50, top: 20, position: 'absolute' }}>⭐️</Text>
+            <Animatable.Text animation='pulse' easing='ease-out' iterationCount='infinite' duration={800} style={{ fontSize: 80, backgroundColor: 'transparent', left: 2, top: 10 }}>🏆</Animatable.Text>
+          </View>
+          <Text style={[styles.bigText, { marginTop: 20 }]}>{`You completed ${this.state.cards.length} card${this.state.cards.length > 1 ? 's' : ''}!`}</Text>
+        </View>
+        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+          {this.renderButton()}
+        </View>
+      </View>
+    )
+  }
+
   render () {
     return (
       <LinearGradient colors={colors.gradient} style={styles.background}>
         {this.state.numberOfCards === 0
           ? <FullscreenText text={'No cards!'} />
           : this.state.isComplete
-            ? <FullscreenText text={`Great, ${this.state.cards.length} question${this.state.cards.length > 1 ? 's' : ''} completed!`} sibling={this.renderButton()} />
+            ? this.renderComplete()
             : this.renderQuiz()
         }
       </LinearGradient>
