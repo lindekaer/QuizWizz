@@ -17,6 +17,7 @@ import {
 } from 'react-native'
 
 styles.quizBubble = { backgroundColor: '#fff', width: Dimensions.get('window').width - 90, padding: 20, borderRadius: 4, marginLeft: 15, marginRight: 15, marginBottom: 20 }
+styles.circle = { justifyContent: 'center', alignItems: 'center', height: 180, width: 180, backgroundColor: 'white', borderRadius: 180 / 2, borderWidth: 10, borderColor: colors.blueDark }
 
 export default class Quiz extends Component {
 
@@ -73,7 +74,7 @@ export default class Quiz extends Component {
     return (
       <View style={[styles.container, { alignItems: 'flex-start', justifyContent: 'space-between', paddingTop: 20 }]}>
         <Text style={{ alignSelf: 'stretch', textAlign: 'center', backgroundColor: 'transparent', color: 'white', paddingBottom: 20 }}>
-          {this.state.index} of {this.state.numberOfCards}
+          {this.state.index + 1} of {this.state.numberOfCards}
         </Text>
         <View style={{ flex: 1, alignSelf: 'stretch' }}>
           {questionNode}
@@ -127,7 +128,7 @@ export default class Quiz extends Component {
     return (
       <View style={{ flex: 1, flexDirection: 'column', paddingBottom: 40, paddingTop: 40 }}>
         <Animatable.View animation='fadeIn' style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <View style={{ justifyContent: 'center', alignItems: 'center', height: 180, width: 180, backgroundColor: 'white', borderRadius: 180 / 2, borderWidth: 10, borderColor: colors.blueDark }}>
+          <View style={styles.circle}>
             <Animatable.View animation='pulse' easing='ease-out' iterationCount='infinite' duration={900} style={{ backgroundColor: 'transparent', top: 10, left: 2 }}>
               <Text style={{ left: 16, top: -15, position: 'absolute' }}>⭐️</Text>
               <Text style={{ left: 33, top: -25, position: 'absolute' }}>⭐️</Text>
